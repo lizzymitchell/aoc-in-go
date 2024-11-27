@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"regexp"
 	"slices"
 	"strconv"
@@ -30,8 +29,6 @@ func run(part2 bool, input string) any {
 	gameSum := 0
 
 	lines := strings.Split(input, "\n")
-	fmt.Println("lines:")
-	fmt.Println(len(lines))
 
 	for i, line := range lines {
 		_ = i
@@ -42,13 +39,9 @@ func run(part2 bool, input string) any {
 		}
 
 		colon := strings.Split(line, ":")
-
 		id := getInt(colon[0])
-		fmt.Println("game id:")
-		fmt.Println(id)
 
 		hands := strings.Split(colon[1], ";")
-
 		handPoss := make([]bool, len(hands))
 
 		for h, hand := range hands {
@@ -60,20 +53,12 @@ func run(part2 bool, input string) any {
 				colour := strings.Split(die, " ")[2]
 
 				diePoss[d] = diePossible(count, colour)
-				if !diePoss[d] {
-					fmt.Println("die not poss")
-					fmt.Println(count)
-					fmt.Println(colour)
-				}
 			}
 
 			handPoss[h] = !slices.Contains(diePoss, false)
 		}
 
-		fmt.Println(handPoss)
-
 		gamePoss := !slices.Contains(handPoss, false)
-		fmt.Println(gamePoss)
 		if gamePoss {
 			gameSum += id
 		}
